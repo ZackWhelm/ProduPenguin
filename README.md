@@ -6,6 +6,8 @@
 
 **idea stuffs**
 
+ideas for the day
+
 **dev stuffs**
 
 completed ✅
