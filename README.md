@@ -1,12 +1,28 @@
 # ProduPenguin
-a penguin that sits on your desktop and helps you be productive :)
+❄️❄️🐧🐧 a penguin that sits on your desktop and helps you be productive 🐧🐧❄️❄️
 
 ## Devlog
-### day 0 
+### day #
 
+**idea stuffs**
+
+**dev stuffs**
+
+completed ✅
+in progress 🔨
+planned 📘
+
+### day 0 
+**idea stuffs**
 
 i miss club penguin. 
 i also like the trend of cozy idle games that live on your browser. 
 i think it'd be cool to spin one of them into a productivity widget.
 bongo cat's input counter feels nice, i think there are some game abstractions that could live on a desktop for productivity. 
+
+**dev stuffs**
+a basic draggable image within transparent window. ✅
+a pomodoro style timer that causes the image to flash blue after timer goes off.🔨
+a timer with animated text that appears above the image representing phase of pomodoro.📘
+
 
