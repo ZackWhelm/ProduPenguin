@@ -1,0 +1,237 @@
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+#if UNITY_STANDALONE_WIN
+using System.Runtime.InteropServices;
+#endif
+
+public class Interactor : MonoBehaviour
+{
+    [Header("Dependencies")]
+    public TransparentWindowController transparentWindowController;
+
+    
+    #if UNITY_STANDALONE_WIN
+    [DllImport("user32.dll")]
+    private static extern bool SetForegroundWindow(System.IntPtr hWnd);
+    
+    [DllImport("user32.dll")]
+    private static extern System.IntPtr GetActiveWindow();
+    
+    [DllImport("user32.dll")]
+    private static extern short GetAsyncKeyState(int vKey);
+    
+    [DllImport("user32.dll")]
+    private static extern bool SetWindowPos(System.IntPtr hWnd, System.IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
+    
+    [DllImport("user32.dll")]
+    private static extern System.IntPtr GetForegroundWindow();
+    #endif
+    
+    public static Interactor Instance { get; private set; }
+    
+    private Canvas canvas;
+
+    [Header("State")]
+    public bool isDraggingAView = false;
+    public View viewBeingDragged = null;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    
+    void Start()
+    {
+        canvas = FindObjectOfType<Canvas>();
+        if (canvas == null)
+        {
+            Debug.LogError("Can vas isn't setup");
+        }
+        Application.focusChanged += OnApplicationFocusChanged;
+        
+        #if UNITY_STANDALONE_WIN
+        if (Application.platform == RuntimePlatform.WindowsPlayer)
+        {
+            MakeWindowAlwaysOnTop();
+        }
+        #endif
+    }
+    
+    private void MakeWindowAlwaysOnTop()
+    {
+        #if UNITY_STANDALONE_WIN
+        if (Application.platform == RuntimePlatform.WindowsPlayer)
+        {
+            System.IntPtr hWnd = GetActiveWindow();
+            SetWindowPos(hWnd, new System.IntPtr(-1), 0, 0, 0, 0, 0x0003);
+        }
+        #endif
+    }
+    
+    void Update()
+    {
+        View viewUnderMouse = GetViewUnderMouse();
+
+        if (viewUnderMouse != null && !Application.isFocused)
+        {
+            ForceFocus();
+        }
+
+        HandleMouseInput();
+    }
+    
+
+    
+    private void OnApplicationFocusChanged(bool hasFocus)
+    {
+        if (hasFocus)
+        {
+            isDraggingAView = false;
+            viewBeingDragged = null;
+        }
+    }
+    
+    private bool wasMouseDown = false;
+    
+    private void HandleMouseInput()
+    {
+        
+        bool isMouseDown = GetMouseButtonState();
+        View viewUnderMouse = GetViewUnderMouse();
+
+        if (!wasMouseDown && isMouseDown)
+        {
+            if (viewUnderMouse != null && viewUnderMouse.isDraggable)
+            {
+                StartDragging(viewUnderMouse);
+            }
+        }
+        
+        if (wasMouseDown && !isMouseDown)
+        {
+            if (isDraggingAView) {
+                StopDragging();
+            }
+        }
+        
+        if (isDraggingAView && viewBeingDragged != null)
+        {
+            viewBeingDragged.HandleDragCont(GetMousePositionLocalInCanvas());
+        }
+        
+        wasMouseDown = isMouseDown;
+    }
+    
+    private bool GetMouseButtonState()
+    {
+        #if UNITY_STANDALONE_WIN
+        if (Application.platform == RuntimePlatform.WindowsPlayer)
+        {
+            short state = GetAsyncKeyState(0x01);
+            return (state & 0x8000) != 0;
+        }
+        #endif
+        return Input.GetMouseButton(0);
+    }
+    
+
+    
+    private void ForceFocus()
+    {
+        #if UNITY_STANDALONE_WIN
+        if (Application.platform == RuntimePlatform.WindowsPlayer)
+        {
+            System.IntPtr currentWindow = GetActiveWindow();
+            System.IntPtr foregroundWindow = GetForegroundWindow();
+            
+            if (currentWindow != foregroundWindow)
+            {
+                DevLogger.Instance.Log("Swapped with foreground window");
+                SetForegroundWindow(currentWindow);
+            }
+            else {
+                DevLogger.Instance.Log("No swap needed");
+            }
+        }
+        #endif
+    }
+    
+    private View GetViewUnderMouse()
+    {
+        if (canvas == null) return null;
+        
+        View[] allViews = FindObjectsOfType<View>();
+        foreach (View view in allViews)
+        {
+            if (view.IsLocalPointInView(GetMousePositionLocalInCanvas()))
+            {
+                if (DevSettings.Instance.HighlightViews) {
+                    view.Highlight();
+                }
+                return view;
+            }
+            else {
+               if (DevSettings.Instance.HighlightViews) {
+                    view.Delight();            
+                }
+            }
+        }
+        
+        return null;
+    }
+    
+    private void StartDragging(View view)
+    {
+        isDraggingAView = true;
+        viewBeingDragged = view;
+        viewBeingDragged.HandleDragStart(GetMousePositionLocalInCanvas());
+    }
+    
+    private void StopDragging()
+    {
+        isDraggingAView = false;
+        if (viewBeingDragged != null)
+        {
+            viewBeingDragged.HandleDragEnd(GetMousePositionLocalInCanvas());
+            viewBeingDragged = null;
+        }
+    }
+    
+    public bool IsMouseOverAView()
+    {
+        return GetViewUnderMouse() != null;
+    }
+    
+    public bool IsDraggingAView
+    {
+        get { return isDraggingAView; }
+        set { isDraggingAView = value; }
+    }
+    
+    public View GetCurrentDraggedView()
+    {
+        return viewBeingDragged;
+    }
+
+    private Vector2 GetMousePositionLocalInCanvas() {
+        Vector2 mousePosition = Input.mousePosition;
+        Vector2 localPoint;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            canvas.GetComponent<RectTransform>(),
+            mousePosition,
+            canvas.worldCamera,
+            out localPoint
+        );
+        return localPoint;
+    }
+}
