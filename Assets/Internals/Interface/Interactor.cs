@@ -156,7 +156,6 @@ public class Interactor : MonoBehaviour
             
             if (currentWindow != foregroundWindow)
             {
-                DevLogger.Instance.Log("Swapped with foreground window");
                 SetForegroundWindow(currentWindow);
             }
             else {
