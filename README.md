@@ -22,7 +22,7 @@ ideas for the day
 
 <br> **dev stuffs** <br>
 <li> a basic draggable image within transparent window. ✅ </li>
-<li> a pomodoro style timer that causes the image to flash blue after timer goes off.🔨</li>
+<li> a pomodoro style timer that causes the image to flash blue after timer goes off.✅</li>
 <li>a timer with animated text that appears above the image representing phase of pomodoro.📘</li>
 
 
