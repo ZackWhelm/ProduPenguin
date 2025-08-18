@@ -22,6 +22,8 @@ ideas for the day
 <li> completed ✅ </li>
 <li>in progress 🔨  </li>
 <li> planned 📘 </li>
+ 
+<br> **observations** <br>
 
 ### day 0 
 **idea stuffs** <br>
@@ -36,6 +38,6 @@ ideas for the day
 <li> a pomodoro style timer that causes the image to flash blue after timer goes off.✅</li>
 <li>a timer with animated text that appears above the image representing phase of pomodoro.✅</li>
 
-**observations** <br>
+ <br> **observations** <br>
 seeing the mining counter go up is decently satsifying, i think an anim of a penguin mining glaciers will be even more satsifying. 
 
