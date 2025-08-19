@@ -14,6 +14,7 @@ public class MainView : View
 
     private RectTransform rectTransform;
     private Vector2 dragOffset;
+    private const string POSITION_SAVE_KEY = "MainView_Position";
 
     
     void Start()
@@ -71,6 +72,7 @@ public class MainView : View
         
         rectTransform.anchoredPosition = newPosition;
         isDragging = false;
+        SavePosition();
     }
 
     public override void Highlight()
@@ -84,8 +86,32 @@ public class MainView : View
     }
     
     private void Init() {
-        MoveToPos(InitRelPosToBottomRight);
+        LoadPosition();
         Resize(width, height);
+    }
+
+    private void LoadPosition()
+    {
+        if (PlayerPrefs.HasKey(POSITION_SAVE_KEY))
+        {
+            string savedPosition = PlayerPrefs.GetString(POSITION_SAVE_KEY);
+            Vector2 position = JsonUtility.FromJson<Vector2>(savedPosition);
+            rectTransform.anchoredPosition = position;
+        }
+        else
+        {
+            MoveToPos(InitRelPosToBottomRight);
+        }
+    }
+
+    private void SavePosition()
+    {
+        if (rectTransform != null)
+        {
+            string positionJson = JsonUtility.ToJson(rectTransform.anchoredPosition);
+            PlayerPrefs.SetString(POSITION_SAVE_KEY, positionJson);
+            PlayerPrefs.Save();
+        }
     }
 
     public void Resize(float newWidth, float newHeight)
