@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -47,7 +48,10 @@ public class MainView : View
     {
         if (rectTransform == null) return;
         
-        rectTransform.anchoredPosition = mousePositionLocal - dragOffset;
+        Vector2 newPosition = mousePositionLocal - dragOffset;
+        newPosition = ViewSnappingHelper.Instance.SnapToScreen(newPosition, new Vector2(width, height), rectTransform.parent as RectTransform);
+        
+        rectTransform.anchoredPosition = newPosition;
         isDragging = true;
     }
 
@@ -62,7 +66,10 @@ public class MainView : View
 
     public override void HandleDragEnd(Vector2 mousePositionLocal)
     {
-        rectTransform.anchoredPosition = mousePositionLocal - dragOffset;
+        Vector2 newPosition = mousePositionLocal - dragOffset;
+        newPosition = ViewSnappingHelper.Instance.SnapToScreen(newPosition,  new Vector2(width, height), rectTransform.parent as RectTransform);
+        
+        rectTransform.anchoredPosition = newPosition;
         isDragging = false;
     }
 
@@ -100,6 +107,7 @@ public class MainView : View
         Vector2 offsetFromBottomRight = new Vector2(-newPos.x, -newPos.y);
         Vector2 finalPosition = bottomRightCorner + offsetFromBottomRight;
         
+        finalPosition = ViewSnappingHelper.Instance.SnapToScreen(finalPosition,  new Vector2(width, height), parentRect);
         rectTransform.anchoredPosition = finalPosition;
     }
 }
