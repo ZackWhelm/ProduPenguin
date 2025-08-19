@@ -27,6 +27,12 @@ public class Interactor : MonoBehaviour
     
     [DllImport("user32.dll")]
     private static extern System.IntPtr GetForegroundWindow();
+    
+    [DllImport("user32.dll")]
+    private static extern bool BringWindowToTop(System.IntPtr hWnd);
+    
+    [DllImport("user32.dll")]
+    private static extern bool ShowWindow(System.IntPtr hWnd, int nCmdShow);
     #endif
     
     public static Interactor Instance { get; private set; }
@@ -36,6 +42,10 @@ public class Interactor : MonoBehaviour
     [Header("State")]
     public bool isDraggingAView = false;
     public View viewBeingDragged = null;
+
+    private bool wasLeftMouseDown = false;
+    private bool wasRightMouseDown = false;
+    private bool wasMiddleMouseDown = false;
 
     void Awake()
     {
@@ -80,13 +90,6 @@ public class Interactor : MonoBehaviour
     
     void Update()
     {
-        View viewUnderMouse = GetViewUnderMouse();
-
-        if (viewUnderMouse != null && !Application.isFocused)
-        {
-            ForceFocus();
-        }
-
         HandleMouseInput();
     }
     
@@ -142,27 +145,6 @@ public class Interactor : MonoBehaviour
         }
         #endif
         return Input.GetMouseButton(0);
-    }
-    
-
-    
-    private void ForceFocus()
-    {
-        #if UNITY_STANDALONE_WIN
-        if (Application.platform == RuntimePlatform.WindowsPlayer)
-        {
-            System.IntPtr currentWindow = GetActiveWindow();
-            System.IntPtr foregroundWindow = GetForegroundWindow();
-            
-            if (currentWindow != foregroundWindow)
-            {
-                SetForegroundWindow(currentWindow);
-            }
-            else {
-                DevLogger.Instance.Log("No swap needed");
-            }
-        }
-        #endif
     }
     
     private View GetViewUnderMouse()
