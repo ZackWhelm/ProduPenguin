@@ -13,26 +13,8 @@ public class Interactor : MonoBehaviour
 
     
     #if UNITY_STANDALONE_WIN
-    [DllImport("user32.dll")]
-    private static extern bool SetForegroundWindow(System.IntPtr hWnd);
-    
-    [DllImport("user32.dll")]
-    private static extern System.IntPtr GetActiveWindow();
-    
-    [DllImport("user32.dll")]
-    private static extern short GetAsyncKeyState(int vKey);
-    
-    [DllImport("user32.dll")]
-    private static extern bool SetWindowPos(System.IntPtr hWnd, System.IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
-    
-    [DllImport("user32.dll")]
-    private static extern System.IntPtr GetForegroundWindow();
-    
-    [DllImport("user32.dll")]
-    private static extern bool BringWindowToTop(System.IntPtr hWnd);
-    
-    [DllImport("user32.dll")]
-    private static extern bool ShowWindow(System.IntPtr hWnd, int nCmdShow);
+    [DllImport("user32.dll")] private static extern short GetAsyncKeyState(int vKey);
+
     #endif
     
     public static Interactor Instance { get; private set; }
@@ -42,10 +24,6 @@ public class Interactor : MonoBehaviour
     [Header("State")]
     public bool isDraggingAView = false;
     public View viewBeingDragged = null;
-
-    private bool wasLeftMouseDown = false;
-    private bool wasRightMouseDown = false;
-    private bool wasMiddleMouseDown = false;
 
     void Awake()
     {
@@ -68,24 +46,6 @@ public class Interactor : MonoBehaviour
             Debug.LogError("Can vas isn't setup");
         }
         Application.focusChanged += OnApplicationFocusChanged;
-        
-        #if UNITY_STANDALONE_WIN
-        if (Application.platform == RuntimePlatform.WindowsPlayer)
-        {
-            MakeWindowAlwaysOnTop();
-        }
-        #endif
-    }
-    
-    private void MakeWindowAlwaysOnTop()
-    {
-        #if UNITY_STANDALONE_WIN
-        if (Application.platform == RuntimePlatform.WindowsPlayer)
-        {
-            System.IntPtr hWnd = GetActiveWindow();
-            SetWindowPos(hWnd, new System.IntPtr(-1), 0, 0, 0, 0, 0x0003);
-        }
-        #endif
     }
     
     void Update()
