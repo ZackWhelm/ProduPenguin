@@ -27,7 +27,7 @@ public class WorkingActivity : Activity
     }
 
     public override void PauseActivity() {
-        IsActive = false;
+        IsPaused = true;
         if (Renderer != null)
         {
             Renderer.UpdateStatusText("Mining stopped");
@@ -35,7 +35,7 @@ public class WorkingActivity : Activity
     }
 
     public override void ResumeActivity() {
-        IsActive = true;
+        IsPaused = false;       
         if (Renderer != null)
         {
             Renderer.UpdateStatusText("Mining in progress...");

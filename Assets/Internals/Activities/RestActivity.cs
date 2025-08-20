@@ -24,7 +24,7 @@ public class RestActivity : Activity
     }
 
     public override void PauseActivity() {
-        IsActive = false;
+        IsPaused = true;
         if (Renderer != null)
         {
             Renderer.UpdateStatusText("Break paused");
@@ -32,7 +32,7 @@ public class RestActivity : Activity
     }
 
     public override void ResumeActivity() {
-        IsActive = true;
+        IsPaused = false;
         if (Renderer != null)
         {
             Renderer.UpdateStatusText("Break Now");

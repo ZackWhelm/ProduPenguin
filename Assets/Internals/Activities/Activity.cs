@@ -26,6 +26,7 @@ public abstract class Activity : MonoBehaviour
     public ActivityRenderer Renderer;
     public bool ShouldCountInputs;
     public bool IsActive;
+    public bool IsPaused = false;
     public float Duration;
     public float TimeElapsed;
     public int InputCount;

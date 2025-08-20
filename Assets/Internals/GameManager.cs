@@ -72,8 +72,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public bool IsInActivity() {
+    public bool IsInSession() {
         return (State == GameState.WorkSession || State == GameState.StudySession || State == GameState.PlaySession);
+    }
+
+    public bool IsInActiveActivity() {
+        Activity currentActivity = ActivityRunner.Instance.currentActivity;
+        return currentActivity != null && currentActivity.IsActive;
     }
 
     public Activity GetNextActivity() {

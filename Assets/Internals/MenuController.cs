@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class MenuController : MonoBehaviour
 {
-    [Header("Dependencies")]
-    public ButtonView playPauseButton;
+    [Header("Main Menu Dependencies")]
     public ButtonView workSessionButton;
+    public ButtonView studySessionButton;
+    public ButtonView playSessionButton;
     public ButtonView mainMenuButton;
+
+    [Header("Session Dependencies")]
+    public ButtonView playPauseButton;
 
     private bool isExpanded = false;
 
@@ -43,9 +47,14 @@ public class MenuController : MonoBehaviour
 
     public void UpdateButtonVisibility()
     {
-        bool isInActivity = GameManager.Instance.IsInActivity();
-        playPauseButton.gameObject.SetActive(isExpanded && isInActivity);
-        workSessionButton.gameObject.SetActive(isExpanded &&!isInActivity);
+        bool isInSession = GameManager.Instance.IsInSession();
+        bool isInActiveActivity = GameManager.Instance.IsInActiveActivity();
+
+
+        playPauseButton.gameObject.SetActive(isExpanded && isInSession && isInActiveActivity);
+        workSessionButton.gameObject.SetActive(isExpanded &&!isInSession);
+        workSessionButton.gameObject.SetActive(isExpanded &&!isInSession);
+        workSessionButton.gameObject.SetActive(isExpanded &&!isInSession);
     }
 
 

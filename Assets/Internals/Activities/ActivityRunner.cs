@@ -31,12 +31,14 @@ public class ActivityRunner : MonoBehaviour
             return;
         }
 
-        if (currentActivity.IsActive) {
+        if (currentActivity.IsActive && !currentActivity.IsPaused) {
             UpdateActivityTime(currentActivity);
             activityTracker.TrackActivityInput(currentActivity);
         }
 
-        currentActivity.ActivityRoutine();
+        if (!currentActivity.IsPaused) {
+            currentActivity.ActivityRoutine();
+        }
     }
 
     private void UpdateActivityTime(Activity activity) {
