@@ -53,3 +53,18 @@ seeing the mining counter go up is decently satsifying, i think an anim of a pen
 
  <br> **observations** <br>
 none yet.
+
+### day 2 
+**idea stuffs** <br>
+<li>Work Sessions will contain loops of activities.</li>
+<li>Lil mini games while resting would be fun</li>
+<li>Not much time today either, smaller tasks</li>
+
+<br> **dev stuffs** <br>
+<li>Refactor activities to better fit work session abstraction. 🔨</li>
+<li>Start all 3 kinds of session from idle state 📘 </li>
+<li>End sessions and give a recap of productivity/time spent📘</li>
+<li>Pause unpause activities when they are active 📘 </li>
+
+ <br> **observations** <br>
+<li>Playing dota and seeing the action count go up was cool -> inspired a recap for sessions. (right now all progress tracking is reset when an activity ends)</li>
