@@ -61,10 +61,11 @@ none yet.
 <li>Not much time today either, smaller tasks</li>
 
 <br> **dev stuffs** <br>
-<li>Refactor activities to better fit work session abstraction. 🔨</li>
-<li>Start all 3 kinds of session from idle state 📘 </li>
-<li>End sessions and give a recap of productivity/time spent📘</li>
-<li>Pause unpause activities when they are active 📘 </li>
+<li>Refactor activities to better fit work session abstraction. ✅</li>
+<li>Start all 3 kinds of session from idle state ✅ </li>
+<li>End sessions and give a recap of productivity/time spent✅</li>
+<li>Pause unpause activities when they are active ✅ </li>
 
  <br> **observations** <br>
 <li>Playing dota and seeing the action count go up was cool -> inspired a recap for sessions. (right now all progress tracking is reset when an activity ends)</li>
+<li>Clicking feels weird and i'll want to have a click inside of recap state, want to make a basic watch animation for playing state and a basic mining activity to work session tmrw, will see if i can clean up clicking later tonight.</li>
