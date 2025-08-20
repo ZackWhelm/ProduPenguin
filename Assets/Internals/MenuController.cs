@@ -52,8 +52,8 @@ public class MenuController : MonoBehaviour
 
         playPauseButton.gameObject.SetActive(IsExpanded && isInSession && isInActiveActivity);
         workSessionButton.gameObject.SetActive(IsExpanded &&!isInSession);
-        workSessionButton.gameObject.SetActive(IsExpanded &&!isInSession);
-        workSessionButton.gameObject.SetActive(IsExpanded &&!isInSession);
+        studySessionButton.gameObject.SetActive(IsExpanded &&!isInSession);
+        playSessionButton.gameObject.SetActive(IsExpanded &&!isInSession);
     }
 
 
@@ -62,6 +62,17 @@ public class MenuController : MonoBehaviour
     }
 
     public void OnWorkSessionStartButtonClick() {
+        DevLogger.Instance.Log("OnWorkSessionStartButtonClick");
         GameManager.Instance.StartWorkSession();
+    }
+
+    public void OnStudySessionStartButtonClick() {
+        DevLogger.Instance.Log("OnStudySessionStartButtonClick");
+        GameManager.Instance.StartStudySession();
+    }
+
+    public void OnPlaySessionStartButtonClick() {
+        DevLogger.Instance.Log("OnPlaySessionStartButtonClick");
+        GameManager.Instance.StartPlaySession();
     }
 }
