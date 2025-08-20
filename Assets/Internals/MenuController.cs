@@ -28,7 +28,6 @@ public class MenuController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        IsExpanded = isExpanded;
     }
 
     public void OnMenuButtonClick() {
@@ -51,10 +50,10 @@ public class MenuController : MonoBehaviour
         bool isInActiveActivity = GameManager.Instance.IsInActiveActivity();
 
 
-        playPauseButton.gameObject.SetActive(isExpanded && isInSession && isInActiveActivity);
-        workSessionButton.gameObject.SetActive(isExpanded &&!isInSession);
-        workSessionButton.gameObject.SetActive(isExpanded &&!isInSession);
-        workSessionButton.gameObject.SetActive(isExpanded &&!isInSession);
+        playPauseButton.gameObject.SetActive(IsExpanded && isInSession && isInActiveActivity);
+        workSessionButton.gameObject.SetActive(IsExpanded &&!isInSession);
+        workSessionButton.gameObject.SetActive(IsExpanded &&!isInSession);
+        workSessionButton.gameObject.SetActive(IsExpanded &&!isInSession);
     }
 
 

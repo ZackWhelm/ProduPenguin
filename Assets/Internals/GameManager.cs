@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        State = GameState.Idle;
     }
 
     public void StartWorkSession() {

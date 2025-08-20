@@ -36,9 +36,7 @@ public class ActivityRunner : MonoBehaviour
             activityTracker.TrackActivityInput(currentActivity);
         }
 
-        if (!currentActivity.IsPaused) {
-            currentActivity.ActivityRoutine();
-        }
+        currentActivity.ActivityRoutine();
     }
 
     private void UpdateActivityTime(Activity activity) {
@@ -63,19 +61,17 @@ public class ActivityRunner : MonoBehaviour
     }
 
     public void PauseActivity() {
-        if (currentActivity != null && currentActivity.IsActive)
+        if (currentActivity != null && !currentActivity.IsPaused)
         {
             currentActivity.PauseActivity();
-            currentActivity.IsActive = false;
         }
     } 
 
     
     public void ResumeActivity() {
-        if (currentActivity != null && !currentActivity.IsActive)
+        if (currentActivity != null && currentActivity.IsPaused)
         {
             currentActivity.ResumeActivity();
-            currentActivity.IsActive = true;
         }
     } 
 
@@ -87,7 +83,7 @@ public class ActivityRunner : MonoBehaviour
 
     public bool HandlePauseOrResumeToggle() {
         if (currentActivity != null) {
-            if (currentActivity.IsActive) {
+            if (!currentActivity.IsPaused) {
                 PauseActivity();
                 return false;
             }
