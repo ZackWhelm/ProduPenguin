@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 68040423}
   - component: {fileID: 68040424}
   m_Layer: 0
-  m_Name: SampleMiningActivity
+  m_Name: WorkingActivity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -288,10 +288,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 68040422}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72dd2c14db8c43a4e81205c90a67d282, type: 3}
+  m_Script: {fileID: 11500000, guid: 72a872a7adbbb00428de80e172ade2e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 0
   DurationType: 1
   Renderer: {fileID: 2059241236}
   ShouldCountInputs: 1
@@ -299,6 +298,7 @@ MonoBehaviour:
   Duration: 1500
   TimeElapsed: 0
   InputCount: 0
+  breakActivity: {fileID: 532340140}
 --- !u!1 &195469450
 GameObject:
   m_ObjectHideFlags: 0
@@ -777,7 +777,7 @@ GameObject:
   - component: {fileID: 532340139}
   - component: {fileID: 532340140}
   m_Layer: 0
-  m_Name: SampleRestActivity
+  m_Name: WorkingActivity_REST
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -810,7 +810,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f0671c425330f4cb804f3017c7ced2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 2
   DurationType: 1
   Renderer: {fileID: 2059241236}
   ShouldCountInputs: 0
@@ -818,6 +817,7 @@ MonoBehaviour:
   Duration: 300
   TimeElapsed: 0
   InputCount: 0
+  linkedActivity: {fileID: 68040424}
 --- !u!1 &716132447
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,8 +1162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1a32c6afb1cc9f46b9a9c7df869fa0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  restActivity: {fileID: 532340140}
   workActivity: {fileID: 68040424}
+  studyActivity: {fileID: 0}
+  playActivity: {fileID: 0}
 --- !u!114 &920963662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2442,7 +2443,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b438bfe88c534ed4eb1bb96a4c8381c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BackgroundRef: {fileID: 0}
   TimerRef: {fileID: 1681315309}
   StatusRef: {fileID: 277133843}
   SoundPlayingImage: {fileID: 1561784804}

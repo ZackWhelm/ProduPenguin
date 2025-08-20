@@ -41,13 +41,11 @@ public class MenuController : MonoBehaviour
         }
     }
 
-    private void UpdateButtonVisibility()
+    public void UpdateButtonVisibility()
     {
-        if (playPauseButton != null)
-            playPauseButton.gameObject.SetActive(isExpanded);
-        
-        if (workSessionButton != null)
-            workSessionButton.gameObject.SetActive(isExpanded);
+        bool isInActivity = GameManager.Instance.IsInActivity();
+        playPauseButton.gameObject.SetActive(isExpanded && isInActivity);
+        workSessionButton.gameObject.SetActive(isExpanded &&!isInActivity);
     }
 
 

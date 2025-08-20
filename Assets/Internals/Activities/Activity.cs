@@ -9,17 +9,19 @@ public enum ActivityDurationType
 }
 
 
-public enum ActivityType 
+public enum ActivityGenre
 {
-    Mining,
-    Studying,
-    Rest,
+    Working, // Keystrokes improve yield of activity
+    Studying, // A focus activity like reading or watching educational content
+    Playing, // A play activity, playing games or watching movies 
+    Rest, // A rest activity, these are breaks from other activities
+    Idle, // A rest activity, these are breaks from other activities
 }
 
 
 public abstract class Activity : MonoBehaviour
 {
-    public ActivityType Type;
+    protected ActivityGenre Genre;
     public ActivityDurationType DurationType;
     public ActivityRenderer Renderer;
     public bool ShouldCountInputs;
@@ -34,6 +36,7 @@ public abstract class Activity : MonoBehaviour
     
     public abstract void PauseActivity();
     public abstract void ResumeActivity();
+    public abstract Activity GetFollowUpActivity();
 
     public abstract void ActivityRoutine();
 

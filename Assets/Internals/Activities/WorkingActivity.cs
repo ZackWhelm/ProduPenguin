@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class MiningActivity : Activity
+public class WorkingActivity : Activity
 {
+    [Header("Dependencies")]
+    public Activity breakActivity;
     private bool isFinishedMining = false;
 
     void Start()
     {
-        Type = ActivityType.Mining;
+        Genre = ActivityGenre.Working;
         ShouldCountInputs = true;
     }
 
@@ -20,7 +22,6 @@ public class MiningActivity : Activity
         InputCount = 0;
         if (Renderer != null)
         {
-            Renderer.SetBackgroundColor(Color.yellow);
             Renderer.UpdateStatusText("Mining in progress...");
         }
     }
@@ -73,8 +74,11 @@ public class MiningActivity : Activity
         isFinishedMining = true;
         if (Renderer != null)
         {
-            Renderer.SetBackgroundColor(Color.red);
             Renderer.UpdateStatusText($"Mining completed!");
         }
+    }
+
+    public override Activity GetFollowUpActivity() {
+        return breakActivity;
     }
 }

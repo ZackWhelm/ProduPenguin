@@ -6,18 +6,32 @@ public enum GameState {
     Idle,
     WorkSession,
     StudySession,
-    EndedPlaySession,
+    PlaySession,
+    Recap,
 }
 
 public class GameManager : MonoBehaviour
 {
-    // This is very hardcoded for now for a basic pomodoro timer
     [Header("Dependencies")]
-    public Activity restActivity;
     public Activity workActivity;
+    public Activity studyActivity;
+    public Activity playActivity;
 
     private Activity nextActivity;
-    private GameState state = GameState.Idle;
+    private GameState _state = GameState.Idle;
+    
+    public GameState State
+    {
+        get { return _state; }
+        set 
+        { 
+            _state = value;
+            if (MenuController.Instance != null)
+            {
+                MenuController.Instance.UpdateButtonVisibility();
+            }
+        }
+    }
 
     public static GameManager Instance;
 
@@ -35,25 +49,45 @@ public class GameManager : MonoBehaviour
     }
 
     public void StartWorkSession() {
-        if (state == GameState.Idle) {
-            state = GameState.WorkSession;
+        if (State == GameState.Idle) {
+            State = GameState.WorkSession;
             ActivityRunner.Instance.StartActivity(workActivity);
-            nextActivity = restActivity;
+            nextActivity = workActivity.GetFollowUpActivity();
         }
     }
 
-    public bool IsInWorkSession() {
-        return state == GameState.WorkSession;
+    public void StartStudySession() {
+        if (State == GameState.Idle) {
+            State = GameState.StudySession;
+            ActivityRunner.Instance.StartActivity(studyActivity);
+            nextActivity = studyActivity.GetFollowUpActivity();
+        }
+    }
+
+    public void StartPlaySession() {
+        if (State == GameState.Idle) {
+            State = GameState.PlaySession;
+            ActivityRunner.Instance.StartActivity(playActivity);
+            nextActivity = playActivity.GetFollowUpActivity();
+        }
+    }
+
+    public bool IsInActivity() {
+        return (State == GameState.WorkSession || State == GameState.StudySession || State == GameState.PlaySession);
     }
 
     public Activity GetNextActivity() {
-        Activity result = nextActivity;
-        if (nextActivity == restActivity) {
-            nextActivity = workActivity;
+        switch (State) {
+            case GameState.WorkSession:
+            case GameState.PlaySession:
+            case GameState.StudySession:
+                Activity nextActivityToReturn = nextActivity;
+                nextActivity = nextActivityToReturn.GetFollowUpActivity();
+                return nextActivityToReturn;
+            case GameState.Idle:
+            case GameState.Recap:
+                return null;
         }
-        else {
-            nextActivity = restActivity;
-        }
-        return result;
+        return null;
     }
 }

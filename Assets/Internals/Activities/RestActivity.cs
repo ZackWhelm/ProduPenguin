@@ -5,12 +5,20 @@ using UnityEngine;
 // TODO(zack): I think activities should be serializable maybe?
 public class RestActivity : Activity
 {
+    [Header("Dependencies")]
+    public Activity linkedActivity;
+
+    void Start()
+    {
+        Genre = ActivityGenre.Rest;
+    }
+
+
     public override void StartActivity() {
         IsActive = true;
         TimeElapsed = 0f;
         if (Renderer != null)
         {
-            Renderer.SetBackgroundColor(Color.blue);
             Renderer.UpdateStatusText("Break Now");
         }
     }
@@ -53,8 +61,11 @@ public class RestActivity : Activity
     public override void HandleActivityEnd() {
         if (Renderer != null)
         {
-            Renderer.SetBackgroundColor(Color.green);
             Renderer.UpdateStatusText($"Break ending");
         }
+    }
+
+    public override Activity GetFollowUpActivity() {
+       return linkedActivity;
     }
 }
