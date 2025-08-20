@@ -15,7 +15,7 @@ public enum ActivityGenre
     Studying, // A focus activity like reading or watching educational content
     Playing, // A play activity, playing games or watching movies 
     Rest, // A rest activity, these are breaks from other activities
-    Idle, // A rest activity, these are breaks from other activities
+    Idle, // An idle activity, this plays when an a normal activity is not running.
 }
 
 

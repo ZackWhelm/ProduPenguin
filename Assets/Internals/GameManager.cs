@@ -17,6 +17,12 @@ public class GameManager : MonoBehaviour
     public Activity studyActivity;
     public Activity playActivity;
 
+    // TODO(zack) should these realy also be activities? im sort of hijacking the renderer for these atm
+    public Activity idleActivity;
+    public Activity recapActivity;
+
+    public SessionDataController sessionDataController;
+
     private Activity nextActivity;
     private GameState _state = GameState.Idle;
     
@@ -35,12 +41,14 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            sessionDataController.CreateFreshSessionData();
         }
         else if (Instance != this)
         {
@@ -50,26 +58,44 @@ public class GameManager : MonoBehaviour
     }
 
     public void StartWorkSession() {
-        if (State == GameState.Idle) {
+        if (State == GameState.Idle || State == GameState.Recap) {
             State = GameState.WorkSession;
+            sessionDataController.StartSession();
             ActivityRunner.Instance.StartActivity(workActivity);
             nextActivity = workActivity.GetFollowUpActivity();
         }
     }
 
     public void StartStudySession() {
-        if (State == GameState.Idle) {
+        if (State == GameState.Idle || State == GameState.Recap) {
             State = GameState.StudySession;
+            sessionDataController.StartSession();
             ActivityRunner.Instance.StartActivity(studyActivity);
             nextActivity = studyActivity.GetFollowUpActivity();
         }
     }
 
     public void StartPlaySession() {
-        if (State == GameState.Idle) {
+        if (State == GameState.Idle || State == GameState.Recap) {
             State = GameState.PlaySession;
+            sessionDataController.StartSession();
             ActivityRunner.Instance.StartActivity(playActivity);
             nextActivity = playActivity.GetFollowUpActivity();
+        }
+    }
+
+    public void EndSession() {
+        if (State == GameState.WorkSession || State == GameState.StudySession || State == GameState.PlaySession) {
+            sessionDataController.EndSession();
+            ActivityRunner.Instance.ReplaceCurrentActivity(recapActivity);
+            State = GameState.Recap;
+        }
+    }
+
+    public void EndRecap() {
+        if (State == GameState.Recap) {
+            ActivityRunner.Instance.ReplaceCurrentActivity(idleActivity);
+            State = GameState.Idle;
         }
     }
 
@@ -96,4 +122,7 @@ public class GameManager : MonoBehaviour
         }
         return null;
     }
+
+
+    
 }

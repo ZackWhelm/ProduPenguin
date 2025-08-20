@@ -31,4 +31,9 @@ public class MenuButtonHelpers : MonoBehaviour
         Debug.Log("Start Play Session Button Clicked");
         MenuController.Instance.OnPlaySessionStartButtonClick();
     }
+
+    
+    public void EndSessionButtonClick() {
+        MenuController.Instance.OnEndSessionButtonClick();
+    }
 }

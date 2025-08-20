@@ -75,6 +75,12 @@ public class ActivityRunner : MonoBehaviour
         }
     } 
 
+    public void ReplaceCurrentActivity(Activity activity) {
+        currentActivity.HandleActivityEnd();
+        currentActivity = activity;
+        currentActivity.StartActivity();
+    }
+
     private IEnumerator StartNextActivityAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);

@@ -12,6 +12,7 @@ public class MenuController : MonoBehaviour
 
     [Header("Session Dependencies")]
     public ButtonView playPauseButton;
+    public ButtonView endSessionButton;
 
     private bool isExpanded = false;
 
@@ -51,6 +52,8 @@ public class MenuController : MonoBehaviour
 
 
         playPauseButton.gameObject.SetActive(IsExpanded && isInSession && isInActiveActivity);
+        endSessionButton.gameObject.SetActive(IsExpanded && isInSession);
+
         workSessionButton.gameObject.SetActive(IsExpanded &&!isInSession);
         studySessionButton.gameObject.SetActive(IsExpanded &&!isInSession);
         playSessionButton.gameObject.SetActive(IsExpanded &&!isInSession);
@@ -64,15 +67,24 @@ public class MenuController : MonoBehaviour
     public void OnWorkSessionStartButtonClick() {
         DevLogger.Instance.Log("OnWorkSessionStartButtonClick");
         GameManager.Instance.StartWorkSession();
+        IsExpanded = false;
     }
 
     public void OnStudySessionStartButtonClick() {
         DevLogger.Instance.Log("OnStudySessionStartButtonClick");
         GameManager.Instance.StartStudySession();
+        IsExpanded = false;
     }
 
     public void OnPlaySessionStartButtonClick() {
         DevLogger.Instance.Log("OnPlaySessionStartButtonClick");
         GameManager.Instance.StartPlaySession();
+        IsExpanded = false;
+    }
+
+    public void OnEndSessionButtonClick() {
+        DevLogger.Instance.Log("OnEndSessionButtonClick");
+        GameManager.Instance.EndSession();
+        IsExpanded = false;
     }
 }
