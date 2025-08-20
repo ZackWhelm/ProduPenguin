@@ -1,5 +1,5 @@
 # ProduPenguin
-❄️❄️🐧🐧 a penguin that sits on your desktop and helps you be productive 🐧🐧❄️❄️
+❄️🐧 a penguin that sits on your desktop and helps you be productive 🐧❄️
 
 ## Planned Features
 <li> a penguin that sits in the corner of your screen and works/studies with you </li>
@@ -41,3 +41,15 @@ ideas for the day
  <br> **observations** <br>
 seeing the mining counter go up is decently satsifying, i think an anim of a penguin mining glaciers will be even more satsifying. 
 
+### day 0 
+**idea stuffs** <br>
+<li>Not much time to work on this today, so i'm just going to add a basic menu</li>
+<li>Did get the idea last night to use a render texture to display a small little 3d scene transparently - so that was done</li>
+
+<br> **dev stuffs** <br>
+<li>menu button that expands out other button 📘 </li>
+<li>buttonView abstract 📘 </li>
+<li>pause start button 📘 </li>
+
+ <br> **observations** <br>
+none yet.
