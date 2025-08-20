@@ -295,7 +295,8 @@ MonoBehaviour:
   Renderer: {fileID: 2059241236}
   ShouldCountInputs: 1
   IsActive: 0
-  Duration: 1500
+  IsPaused: 0
+  Duration: 15
   TimeElapsed: 0
   InputCount: 0
   breakActivity: {fileID: 532340140}
@@ -814,7 +815,8 @@ MonoBehaviour:
   Renderer: {fileID: 2059241236}
   ShouldCountInputs: 0
   IsActive: 0
-  Duration: 300
+  IsPaused: 0
+  Duration: 3
   TimeElapsed: 0
   InputCount: 0
   linkedActivity: {fileID: 68040424}
@@ -1177,9 +1179,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc3938b053fe9ef43897aaa101f6f431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playPauseButton: {fileID: 426122160}
   workSessionButton: {fileID: 18091048}
+  studySessionButton: {fileID: 0}
+  playSessionButton: {fileID: 0}
   mainMenuButton: {fileID: 1502697528}
+  playPauseButton: {fileID: 426122160}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
