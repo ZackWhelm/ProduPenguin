@@ -15,11 +15,19 @@ public class RestActivity : Activity
         }
     }
 
-    public override void StopActivity() {
+    public override void PauseActivity() {
         IsActive = false;
         if (Renderer != null)
         {
             Renderer.UpdateStatusText("Break paused");
+        }
+    }
+
+    public override void ResumeActivity() {
+        IsActive = true;
+        if (Renderer != null)
+        {
+            Renderer.UpdateStatusText("Break Now");
         }
     }
 

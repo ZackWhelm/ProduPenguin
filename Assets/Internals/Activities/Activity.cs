@@ -30,7 +30,11 @@ public abstract class Activity : MonoBehaviour
 
 
     public abstract void StartActivity();
-    public abstract void StopActivity();
-    public abstract void ActivityRoutine();
     public abstract void HandleActivityEnd();
+    
+    public abstract void PauseActivity();
+    public abstract void ResumeActivity();
+
+    public abstract void ActivityRoutine();
+
 }

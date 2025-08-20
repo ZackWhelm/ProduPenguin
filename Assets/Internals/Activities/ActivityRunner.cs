@@ -60,18 +60,40 @@ public class ActivityRunner : MonoBehaviour
         currentActivity.StartActivity();
     }
 
-    public void StopActivity() {
-        if (currentActivity != null)
+    public void PauseActivity() {
+        if (currentActivity != null && currentActivity.IsActive)
         {
-            currentActivity.StopActivity();
+            currentActivity.PauseActivity();
             currentActivity.IsActive = false;
         }
+    } 
 
+    
+    public void ResumeActivity() {
+        if (currentActivity != null && !currentActivity.IsActive)
+        {
+            currentActivity.ResumeActivity();
+            currentActivity.IsActive = true;
+        }
     } 
 
     private IEnumerator StartNextActivityAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         StartActivity(GameManager.Instance.GetNextActivity());
+    }
+
+    public bool HandlePauseOrResumeToggle() {
+        if (currentActivity != null) {
+            if (currentActivity.IsActive) {
+                PauseActivity();
+                return false;
+            }
+            else {
+                ResumeActivity();
+                return true;
+            }
+        }
+        return false;
     }
 }
