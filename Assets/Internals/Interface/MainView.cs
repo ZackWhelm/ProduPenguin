@@ -84,6 +84,11 @@ public class MainView : View
     {
         image.color = delightColor;
     }
+    public override void HandleClick()
+    {
+        return;
+    }
+
     
     private void Init() {
         LoadPosition();

@@ -3,14 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class ButtonView : View
 {
     [Header("Button Setup")]
     public Image image;
-    
+    public Color highlightColor = Color.yellow;
+    public Color delightColor = Color.red;
+    public RectTransform fullScreenRectCanvas;
+    public UnityEvent onClick; 
+
+
     private RectTransform rectTransform;
     private Vector2 dragOffset;
+
+
 
     void Start()
     {
@@ -34,17 +42,13 @@ public class ButtonView : View
     {
         if (rectTransform == null) return false;
         
-        Vector3 worldPoint = rectTransform.parent.TransformPoint(mousePositionLocal);
-        Vector2 localPointToThis = rectTransform.InverseTransformPoint(worldPoint);
+        Vector2 localPointToThis = rectTransform.InverseTransformPoint(fullScreenRectCanvas.parent.TransformPoint(mousePositionLocal));
         
-        if (rectTransform.rect.Contains(localPointToThis))
-        {
-            Vector2 center = rectTransform.rect.center;
-            float distance = Vector2.Distance(localPointToThis, center);
-            float radius = Mathf.Min(width, height) / 2f;
-            return distance <= radius;
-        }
-        return false;
+        Vector2 center = rectTransform.rect.center;
+        float distance = Vector2.Distance(localPointToThis, center);
+        float radius = Mathf.Min(width, height) / 2f;
+        
+        return distance <= radius;
     }
 
     public override void HandleDragCont(Vector2 mousePositionLocal)
@@ -62,12 +66,19 @@ public class ButtonView : View
         return;
     }
 
+    public override void HandleClick()
+    {
+        onClick.Invoke();
+    }
+
     public override void Highlight()
     {
+        image.color = highlightColor;
     }
 
     public override void Delight()
     {
+        image.color = delightColor;
     }
 
     private void Init()

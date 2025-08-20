@@ -12,6 +12,9 @@ public abstract class View : MonoBehaviour
     [Header("Dragging Settings")]
     public bool isDraggable = true;
 
+    [Header("Clickable Settings")]
+    public bool isClickable = true;
+
     [Header("State")]
     public bool isDragging = true;
     
@@ -20,8 +23,10 @@ public abstract class View : MonoBehaviour
     public abstract void HandleDragCont(Vector2 mousePositionLocal);
     public abstract void HandleDragStart(Vector2 mousePositionLocal);
     public abstract void HandleDragEnd(Vector2 mousePositionLocal);
+    public abstract void HandleClick();
 
     // DEV MODE STUFFS
     public abstract void Highlight();
     public abstract void Delight();
+    
 }

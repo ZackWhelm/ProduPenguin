@@ -78,6 +78,10 @@ public class Interactor : MonoBehaviour
             {
                 StartDragging(viewUnderMouse);
             }
+            if (viewUnderMouse != null && viewUnderMouse.isClickable)
+            {
+                HandleClick(viewUnderMouse);
+            }
         }
         
         if (wasMouseDown && !isMouseDown)
@@ -136,6 +140,10 @@ public class Interactor : MonoBehaviour
         isDraggingAView = true;
         viewBeingDragged = view;
         viewBeingDragged.HandleDragStart(GetMousePositionLocalInCanvas());
+    }
+
+    private void HandleClick(View view){
+        view.HandleClick();
     }
     
     private void StopDragging()
