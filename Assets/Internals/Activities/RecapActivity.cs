@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class IdleActivity : StandardActivity
+public class RecapActivity : StandardActivity
 {
     protected override void Start()
     {
@@ -39,5 +39,14 @@ public class IdleActivity : StandardActivity
 
     public override Activity GetFollowUpActivity() {
         return null;
+    }
+
+    public void SetRecapData(SessionData data) {
+        UpdateTimerText("Blocks completed: " + data.ActivitiesCompleted);
+    }
+
+    public override void ActivityRoutine()
+    {
+        return;
     }
 }

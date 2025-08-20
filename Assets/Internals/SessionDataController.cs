@@ -17,8 +17,25 @@ public class SessionDataController : MonoBehaviour
         CurrentSessionData.EndSession();
     }
 
+    public void ResetSession()
+    {
+        CurrentSessionData.ResetSession();
+    }
+
     public void StartSession()
     {
         CurrentSessionData.StartSession();
+    }
+
+    public SessionData GetCurrData() {
+        return CurrentSessionData;
+    }
+
+    public void IncrementActivitiesCompleted() {
+        CurrentSessionData.IncrementActivitiesCompleted();
+    }
+
+    public void IncrementRestsCompleted() {
+        CurrentSessionData.IncrementRestsCompleted();
     }
 }

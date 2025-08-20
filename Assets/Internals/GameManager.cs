@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     // TODO(zack) should these realy also be activities? im sort of hijacking the renderer for these atm
     public Activity idleActivity;
-    public Activity recapActivity;
+    public RecapActivity recapActivity;
 
     public SessionDataController sessionDataController;
 
@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         State = GameState.Idle;
+        ActivityRunner.Instance.ReplaceCurrentActivity(idleActivity);
     }
 
     public void StartWorkSession() {
@@ -87,6 +88,8 @@ public class GameManager : MonoBehaviour
     public void EndSession() {
         if (State == GameState.WorkSession || State == GameState.StudySession || State == GameState.PlaySession) {
             sessionDataController.EndSession();
+            recapActivity.SetRecapData(sessionDataController.GetCurrData());
+            sessionDataController.ResetSession();
             ActivityRunner.Instance.ReplaceCurrentActivity(recapActivity);
             State = GameState.Recap;
         }

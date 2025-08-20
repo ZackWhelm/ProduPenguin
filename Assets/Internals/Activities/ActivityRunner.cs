@@ -76,7 +76,7 @@ public class ActivityRunner : MonoBehaviour
     } 
 
     public void ReplaceCurrentActivity(Activity activity) {
-        currentActivity.HandleActivityEnd();
+        currentActivity.ForceEnd();
         currentActivity = activity;
         currentActivity.StartActivity();
     }

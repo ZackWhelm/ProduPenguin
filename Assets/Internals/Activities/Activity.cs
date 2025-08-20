@@ -33,8 +33,9 @@ public abstract class Activity : MonoBehaviour
 
 
     public abstract void StartActivity();
-    public abstract void HandleActivityEnd();
-    
+    public abstract void HandleActivityEnd(); // Natural Activity End
+    public abstract void ForceEnd(); // Session Ends
+
     public abstract void PauseActivity();
     public abstract void ResumeActivity();
     public abstract Activity GetFollowUpActivity();

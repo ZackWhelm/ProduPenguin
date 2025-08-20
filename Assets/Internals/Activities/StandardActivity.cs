@@ -45,9 +45,20 @@ public abstract class StandardActivity : Activity
         }
     }
 
+    public override void ForceEnd() {
+        isFinished = true;
+        UpdateStatusText(GetEndStatusText());
+    }
+
     public override void HandleActivityEnd()
     {
         isFinished = true;
+        if (Genre != ActivityGenre.Idle && Genre != ActivityGenre.Rest) {
+            GameManager.Instance.sessionDataController.IncrementActivitiesCompleted();
+        }
+        else if (Genre == ActivityGenre.Rest) {
+            GameManager.Instance.sessionDataController.IncrementRestsCompleted();
+        }
         UpdateStatusText(GetEndStatusText());
     }
 
