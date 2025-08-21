@@ -65,30 +65,36 @@ public class Interactor : MonoBehaviour
     }
     
     private bool wasMouseDown = false;
+    private View viewUnderMouseOnPress = null;
     
     private void HandleMouseInput()
     {
-        
         bool isMouseDown = GetMouseButtonState();
         View viewUnderMouse = GetViewUnderMouse();
 
         if (!wasMouseDown && isMouseDown)
         {
+            viewUnderMouseOnPress = viewUnderMouse;
+            
             if (viewUnderMouse != null && viewUnderMouse.isDraggable)
             {
                 StartDragging(viewUnderMouse);
-            }
-            if (viewUnderMouse != null && viewUnderMouse.isClickable)
-            {
-                HandleClick(viewUnderMouse);
             }
         }
         
         if (wasMouseDown && !isMouseDown)
         {
+            if (viewUnderMouseOnPress != null && viewUnderMouseOnPress.isClickable && 
+                viewUnderMouse == viewUnderMouseOnPress)
+            {
+                HandleClick(viewUnderMouseOnPress);
+            }
+            
             if (isDraggingAView) {
                 StopDragging();
             }
+            
+            viewUnderMouseOnPress = null;
         }
         
         if (isDraggingAView && viewBeingDragged != null)
