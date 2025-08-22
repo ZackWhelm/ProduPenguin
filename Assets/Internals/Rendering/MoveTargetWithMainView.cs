@@ -53,7 +53,7 @@ public class MoveTargetWithMainView : MonoBehaviour
             xValue = viewportPoint.y;
         }
         
-        float mappedX = Mathf.Lerp(maxX, minX, xValue);
+        float mappedX = Mathf.Lerp(minX, maxX, xValue);
         targetPosition = new Vector3(mappedX, originalPosition.y, originalPosition.z);
     }
     

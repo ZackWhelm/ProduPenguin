@@ -12,6 +12,9 @@ public enum PenguinState
 
 public class PenguinActionRenderer : MonoBehaviour
 {
+    [Header("Dependencies")]
+    public ActivityCameraController activityCameraController;
+
     [Header("State Management")]
     public PenguinState currentState = PenguinState.Idle;
     public bool isPaused = false;
@@ -76,24 +79,29 @@ public class PenguinActionRenderer : MonoBehaviour
         {
             case PenguinState.Idle:
                 StopAllCoroutines();
+                activityCameraController.SetIdleCamera();
                 transform.position = originalPosition;
                 transform.rotation = originalRotation;
                 break;
             case PenguinState.Watching:
                 StopAllCoroutines();
+                activityCameraController.SetIdleCamera();
                 transform.rotation = originalRotation;
                 break;
             case PenguinState.Mining:
+                activityCameraController.SetMiningCamera();
                 StopAllCoroutines();
                 transform.rotation = originalRotation;
                 StartCoroutine(MiningSequence());
                 break;
             case PenguinState.Studying:
                 StopAllCoroutines();
+                activityCameraController.SetIdleCamera();
                 transform.rotation = originalRotation;
                 StartCoroutine(StudyingSequence());
                 break;
             default:
+                activityCameraController.SetIdleCamera();
                 PenguinMiningController miningController = GetComponent<PenguinMiningController>();
                 if (miningController != null)
                 {

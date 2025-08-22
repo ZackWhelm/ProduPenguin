@@ -5,7 +5,6 @@ using UnityEngine;
 public class PenguinMiningController : MonoBehaviour
 {
     [Header("Dependencies")]
-    public ActivityCameraController cameraController;
     
     [Header("Mining Settings")]
     public float miningDuration = 3f;
@@ -150,11 +149,7 @@ public class PenguinMiningController : MonoBehaviour
             isMoving = false;
             miningStarted = true;
             SetMiningNodesVisibility(true);
-            
-            if (cameraController != null)
-            {
-                cameraController.SetMiningCamera();
-            }
+
         }
     }
     
@@ -164,11 +159,6 @@ public class PenguinMiningController : MonoBehaviour
         isMoving = false;
         miningStarted = false;
         SetMiningNodesVisibility(false);
-        
-        if (cameraController != null)
-        {
-            cameraController.SetIdleCamera();
-        }
     }
     
     public void AddMiningPrefab(Transform prefab)

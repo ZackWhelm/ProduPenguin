@@ -51,17 +51,4 @@ public class ActivityCameraController : MonoBehaviour
     {
         return currentActiveCamera;
     }
-    
-    public void AddVirtualCamera(CinemachineVirtualCamera newCamera, string cameraName)
-    {
-        switch (cameraName.ToLower())
-        {
-            case "idle":
-                idleCamera = newCamera;
-                break;
-            case "mining":
-                miningCamera = newCamera;
-                break;
-        }
-    }
 }

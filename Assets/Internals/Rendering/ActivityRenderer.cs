@@ -4,11 +4,11 @@ using TMPro;
 
 public class ActivityRenderer : MonoBehaviour
 {
-    [Header("Session Type Renderer")]
+    [Header("Dependencies")]
     public SessionTypeRenderer sessionTypeRenderer;
     public ActivityTimerRenderer activityTimerRenderer;
     public PenguinActionRenderer penguinRenderer;
-
+    
     public void SetActivity(Activity activity)
     {
         UpdateActivityDisplay(activity);
