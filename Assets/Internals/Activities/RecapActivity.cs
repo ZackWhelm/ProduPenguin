@@ -42,7 +42,7 @@ public class RecapActivity : StandardActivity
     }
 
     public void SetRecapData(SessionData data) {
-        UpdateTimerText("Blocks completed: " + data.ActivitiesCompleted);
+        
     }
 
     public override void ActivityRoutine()

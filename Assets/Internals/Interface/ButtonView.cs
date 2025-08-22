@@ -8,27 +8,14 @@ using UnityEngine.Events;
 public class ButtonView : View
 {
     [Header("Button Setup")]
-    public Image image;
-    public Color highlightColor = Color.yellow;
-    public Color delightColor = Color.red;
     public RectTransform fullScreenRectCanvas;
     public UnityEvent onClick; 
-
-
+    
     private RectTransform rectTransform;
     private Vector2 dragOffset;
 
-
-
     void Start()
     {
-        image = GetComponent<Image>();
-        if (image == null)
-        {
-            Debug.LogError(gameObject.name + " has no image");
-            return;
-        }
-
         rectTransform = GetComponent<RectTransform>();
         if (rectTransform == null)
         {
@@ -73,12 +60,12 @@ public class ButtonView : View
 
     public override void Highlight()
     {
-        image.color = highlightColor;
+        return;
     }
 
     public override void Delight()
     {
-        image.color = delightColor;
+        return;
     }
 
     private void Init()

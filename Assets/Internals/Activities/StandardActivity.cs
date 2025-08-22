@@ -17,6 +17,11 @@ public abstract class StandardActivity : Activity
         isFinished = false;
         TimeElapsed = 0f;
         InputCount = 0;
+        if (Renderer != null)
+        {
+            Renderer.UpdateActivityGenreType(Genre);
+            Renderer.ToggleTimer(DurationType == ActivityDurationType.Fixed);
+        }
         UpdateStatusText(GetStartStatusText());
     }
 
@@ -34,20 +39,11 @@ public abstract class StandardActivity : Activity
 
     public override void ActivityRoutine()
     {
-        if (isFinished)
-        {
-            UpdateTimerText("Time up");
-        }
-        else
-        {
-            UpdateTimerDisplay();
-            UpdateStatusText(GetRoutineStatusText());
-        }
+        UpdateTimerDisplay();
     }
 
     public override void ForceEnd() {
         isFinished = true;
-        UpdateStatusText(GetEndStatusText());
     }
 
     public override void HandleActivityEnd()
@@ -59,7 +55,6 @@ public abstract class StandardActivity : Activity
         else if (Genre == ActivityGenre.Rest) {
             GameManager.Instance.sessionDataController.IncrementRestsCompleted();
         }
-        UpdateStatusText(GetEndStatusText());
     }
 
     protected void UpdateTimerDisplay()
@@ -74,14 +69,9 @@ public abstract class StandardActivity : Activity
         int seconds = Mathf.FloorToInt(timeRemaining % 60f);
         
         string timeText = string.Format("{0:00}:{1:00}", minutes, seconds);
-        UpdateTimerText(timeText);
-    }
-
-    protected void UpdateTimerText(string text)
-    {
         if (Renderer != null)
         {
-            Renderer.UpdateTimerText(text);
+            Renderer.UpdateTimer(timeText);
         }
     }
 
@@ -89,7 +79,7 @@ public abstract class StandardActivity : Activity
     {
         if (Renderer != null)
         {
-            Renderer.UpdateStatusText(text);
+            Renderer.UpdateStatus(text);
         }
     }
 
