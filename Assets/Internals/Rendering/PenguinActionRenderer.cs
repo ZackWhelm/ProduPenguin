@@ -93,6 +93,13 @@ public class PenguinActionRenderer : MonoBehaviour
                 transform.rotation = originalRotation;
                 StartCoroutine(StudyingSequence());
                 break;
+            default:
+                PenguinMiningController miningController = GetComponent<PenguinMiningController>();
+                if (miningController != null)
+                {
+                    miningController.StopMining();
+                }
+                break;
         }
     }
 
@@ -148,7 +155,8 @@ public class PenguinActionRenderer : MonoBehaviour
     
     private void HandleMiningState()
     {
-
+        // The mining behavior is now handled by PenguinMiningController
+        // This method can be used for additional mining animations if needed
     }
     
     private void HandleStudyingState()
@@ -184,6 +192,13 @@ public class PenguinActionRenderer : MonoBehaviour
     
     private IEnumerator MiningSequence()
     {
+        // Start the mining controller when entering mining state
+        PenguinMiningController miningController = GetComponent<PenguinMiningController>();
+        if (miningController != null)
+        {
+            miningController.StartMining();
+        }
+        
         yield return null;
     }
     
