@@ -69,3 +69,15 @@ none yet.
  <br> **observations** <br>
 <li>Playing dota and seeing the action count go up was cool -> inspired a recap for sessions. (right now all progress tracking is reset when an activity ends)</li>
 <li>Clicking feels weird and i'll want to have a click inside of recap state, want to make a basic watch animation for playing state and a basic mining activity to work session tmrw, will see if i can clean up clicking later tonight.</li>
+
+### day 3
+
+**idea stuffs** <br>
+<li>ideas feel pretty set, i'd like to eventually do daily reminders but that will come after setting up "gameplay" logic.  b</li>
+
+<br> **dev stuffs** <br>
+<li> clean up render activity logic -> display 3d object with hyper basic anims and a small icon representing state 📘 </li>
+<li>create a playing session state where object jumps every few seconds after an input threshold 📘  </li>
+<li> create a working session state where object mines and then moves to mine next node 📘 </li>
+ 
+<br> **observations** <br>
