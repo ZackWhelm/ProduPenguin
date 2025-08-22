@@ -91,9 +91,22 @@ ideas feel pretty set, i'd like to eventually do daily reminders but that will c
 thinking this [guy](https://sketchfab.com/3d-models/cute-penguin-fully-rigged-72491359f60045a3aebda0eb3e1daf59) will be the og version of the penguin
 
 <br> **dev stuffs** <br>
-<li> display 3d object with hyper basic anims 📘 </li>
-<li> create a playing session state where object jumps every few seconds after an input threshold 📘  </li>
-<li> create a working session state where object mines and then moves to mine next node 📘 </li>
+<li> display 3d object with hyper basic anims ✅ </li>
+<li> create a playing session state where object watches your screen with you ✅ </li>
+<li> create a working session state where object mines and then moves to mine next node ✅ </li>
  
 <br> **observations** <br>
+<li> camera angle will be super important here + satsifying animations. </li>
+<li> think a notif system (for reminders) should be built after a temp study animation.  </li>
 
+### day 5
+
+**idea stuffs** <br>
+customizable timing for notifs 📘
+
+<br> **dev stuffs** <br>
+<li> temp study animation 📘</li>
+<li> basic notif system 📘</li>
+<li> customizable timing for activities📘 </li>
+ 
+<br> **observations** <br>
