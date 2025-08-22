@@ -76,8 +76,10 @@ none yet.
 <li>ideas feel pretty set, i'd like to eventually do daily reminders but that will come after setting up "gameplay" logic.  b</li>
 
 <br> **dev stuffs** <br>
+<li> Create an icon displaying what activity genre is currently happening, refactor some rendering logic in prep for 3d rendering ✅ </li>
 <li> clean up render activity logic -> display 3d object with hyper basic anims and a small icon representing state 📘 </li>
 <li>create a playing session state where object jumps every few seconds after an input threshold 📘  </li>
 <li> create a working session state where object mines and then moves to mine next node 📘 </li>
  
 <br> **observations** <br>
+<li> lots of stuff getting punted to tmrw, very unproductive day :( </li>
