@@ -999,7 +999,7 @@ MonoBehaviour:
   ShouldCountInputs: 0
   IsActive: 0
   IsPaused: 0
-  Duration: 60
+  Duration: 300
   TimeElapsed: 0
   InputCount: 0
   linkedActivity: {fileID: 643603094}
@@ -1304,7 +1304,7 @@ MonoBehaviour:
   ShouldCountInputs: 0
   IsActive: 0
   IsPaused: 0
-  Duration: 400
+  Duration: 1500
   TimeElapsed: 0
   InputCount: 0
   breakActivity: {fileID: 369829100}
@@ -2419,7 +2419,7 @@ MonoBehaviour:
   ShouldCountInputs: 0
   IsActive: 0
   IsPaused: 0
-  Duration: 60
+  Duration: 300
   TimeElapsed: 0
   InputCount: 0
   linkedActivity: {fileID: 1940327449}
@@ -4077,7 +4077,7 @@ MonoBehaviour:
   ShouldCountInputs: 1
   IsActive: 0
   IsPaused: 0
-  Duration: 900
+  Duration: 1200
   TimeElapsed: 0
   InputCount: 0
   breakActivity: {fileID: 0}

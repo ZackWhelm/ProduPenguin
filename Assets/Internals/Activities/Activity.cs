@@ -16,6 +16,7 @@ public enum ActivityGenre
     Playing, // A play activity, playing games or watching movies 
     Rest, // A rest activity, these are breaks from other activities
     Idle, // An idle activity, this plays when an a normal activity is not running.
+    Recap, // A recap activity, this is when player is reading the recap of an activity
 }
 
 

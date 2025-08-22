@@ -9,7 +9,7 @@ public class RecapActivity : StandardActivity
     {
         base.Start();
         DurationType = ActivityDurationType.Free;
-        Genre = ActivityGenre.Idle;
+        Genre = ActivityGenre.Recap;
     }
 
     protected override string GetStartStatusText()

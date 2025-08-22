@@ -45,6 +45,9 @@ public class SessionTypeRenderer : MonoBehaviour
             case ActivityGenre.Idle:
                 SessionTypeImageRef.sprite = idleSession;
                 break;
+            case ActivityGenre.Recap:
+                SessionTypeImageRef.sprite = recapSession;
+                break;
         }
     }
 }
