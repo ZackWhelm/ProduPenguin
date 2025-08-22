@@ -7,7 +7,8 @@ public class ActivityRenderer : MonoBehaviour
     [Header("Session Type Renderer")]
     public SessionTypeRenderer sessionTypeRenderer;
     public ActivityTimerRenderer activityTimerRenderer;
-    
+    public PenguinActionRenderer penguinRenderer;
+
     public void SetActivity(Activity activity)
     {
         UpdateActivityDisplay(activity);
@@ -19,6 +20,10 @@ public class ActivityRenderer : MonoBehaviour
         if (sessionTypeRenderer != null)
         {
             sessionTypeRenderer.SetSessionGenreType(activityGenre);
+        }
+        if (penguinRenderer != null)
+        {
+            penguinRenderer.SetStateFromGenre(activityGenre);
         }
     }
     
